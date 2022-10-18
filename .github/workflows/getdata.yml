@@ -19,9 +19,6 @@ jobs:
         run: |
           mkdir ~/hass-config_data/data
           mv -v hass-config/appdaemon/apps/helpers/* ~/hass-config_data/data
-          cd ..
-          ls
-          rm github-actions-test/hass-config
           git checkout -b $(date "+%Y-%m-%d") 
           git commit -m "Updating RepoName data"
           git push origin $(date "+%Y-%m-%d")
