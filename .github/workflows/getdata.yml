@@ -3,7 +3,7 @@ name: Clone Repo Workflow
 on:
   push:
   schedule:
-    - cron: '36 15 * * *'
+    - cron: '37 15 * * *'
   workflow_dispatch:
     
 jobs:
@@ -17,7 +17,7 @@ jobs:
          repository: 'hass-config'
       - name: Access repo content
         run: |
-          mv -v hass-config/appdaemon/apps/helpers/* hass-config/data
+          mv -v hass-config/appdaemon/apps/helpers/* hass-config_data/data
           rm -rf hass-config
           git checkout -b $(date "+%Y-%m-%d") 
           git commit -m "Updating RepoName data"
