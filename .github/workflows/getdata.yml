@@ -3,7 +3,7 @@ name: Clone Repo Workflow
 on:
   push:
   schedule:
-    - cron: '17 18 * * *'
+    - cron: '18 18 * * *'
   workflow_dispatch:
     
 jobs:
@@ -21,7 +21,7 @@ jobs:
       - name: Access repo content
         run: |
           mkdir hass-config_data/data
-          cp -v /hass-config/appdaemon/apps/helpers/*  hass-config_data/data
+          cp -v hass-config/appdaemon/apps/helpers/*  hass-config_data/data
           git checkout -b $(date "+%Y-%m-%d")
           git config --global user.email "riley@riley.com"
           git config --global user.name "Riley"
