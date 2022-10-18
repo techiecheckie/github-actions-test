@@ -3,13 +3,16 @@ name: Clone Repo Workflow
 on:
   push:
   schedule:
-    - cron: '56 15 * * *'
+    - cron: '17 17 * * *'
   workflow_dispatch:
     
 jobs:
   job-public-repo-window:
     runs-on: windows-latest
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Clone repo
         uses: GuillaumeFalourd/clone-github-repo-action@v2
         with:
@@ -17,5 +20,10 @@ jobs:
          repository: 'hass-config'
       - name: Access repo content
         run: |
-          mkdir hass-config_data/data
-          cp -v hass-config/appdaemon/apps/helpers/* hass-config_data/data
+          mkdir ~/hass-config_data/data
+          mv -v hass-config/appdaemon/apps/helpers/* ./data
+          rm -rf hass-config
+          git checkout -b $(date "+%Y-%m-%d")
+          git add ./data
+          git commit -m "Updating Hass Config data."
+          git push origin $(date "+%Y-%m-%d")
