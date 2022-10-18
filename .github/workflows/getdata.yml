@@ -3,29 +3,28 @@ name: Clone Repo Workflow
 on:
   push:
   schedule:
-    - cron: '12 18 * * *'
+    - cron: '17 18 * * *'
   workflow_dispatch:
     
 jobs:
   job-public-repo-window:
     runs-on: windows-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Clone repo
         uses: GuillaumeFalourd/clone-github-repo-action@v2
         with:
          owner: 'thomasloven'
          repository: 'hass-config'
-      - name: Checkout my repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Access repo content
         run: |
           mkdir hass-config_data/data
-          cp -v hass-config/appdaemon/apps/helpers/*  hass-config_data/data
+          cp -v /hass-config/appdaemon/apps/helpers/*  hass-config_data/data
           git checkout -b $(date "+%Y-%m-%d")
           git config --global user.email "riley@riley.com"
           git config --global user.name "Riley"
-          git add hass-config/data
+          git add hass-config_data/data/
           git commit -m "Updating Hass Config data."
           git push origin $(date "+%Y-%m-%d")
