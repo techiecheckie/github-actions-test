@@ -3,7 +3,7 @@ name: Clone Repo Workflow
 on:
   push:
   schedule:
-    - cron: '22 17 * * *'
+    - cron: '24 17 * * *'
   workflow_dispatch:
     
 jobs:
@@ -23,6 +23,6 @@ jobs:
           mkdir ~/hass-config_data/data
           cp -v hass-config/appdaemon/apps/helpers/* ~/hass-config_data/data/
           git checkout -b $(date "+%Y-%m-%d")
-          git add ./data
+          git add ~/hass-config_data/data/
           git commit -m "Updating Hass Config data."
           git push origin $(date "+%Y-%m-%d")
