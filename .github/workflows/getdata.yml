@@ -2,23 +2,23 @@ name: Clone Repo Workflow
 
 on:
   push:
-    schedule:
-      -cron: '30 15 * * *'
-    workflow_dispatch:
+  schedule:
+    - cron: '32 15 * * *'
+  workflow_dispatch:
     
 jobs:
   job-public-repo-window:
     runs-on: windows-latest
     steps:
-      -name: Clone repo
-       uses: GuillaumeFalourd/clone-github-repo-action@v2
-       with:
-        owner: 'thomasloven'
-        repository: 'hass-config'
+      - name: Clone repo
+        uses: GuillaumeFalourd/clone-github-repo-action@v2
+        with:
+         owner: 'thomasloven'
+         repository: 'hass-config'
        
-       -name: Access repo content
+      - name: Access repo content
         run: |
-        -name: Access cloned repo content
+         - name: Access cloned repo content
            run: |
                 mv -v hass-config/appdaemon/apps/helpers/* hass-config/data
                 rm -rf hass-config
