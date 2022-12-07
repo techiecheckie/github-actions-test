@@ -3,7 +3,6 @@ name: Clone Repo Workflow
 on:
   push:
   schedule:
-    - cron: '18 18 * * *'
   workflow_dispatch:
     
 jobs:
